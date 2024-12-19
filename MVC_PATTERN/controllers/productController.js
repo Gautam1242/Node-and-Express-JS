@@ -7,7 +7,7 @@ const getProducts = async (req, res) => {
     const products = await Product.find();
 
     if (!products || products.length === 0) {
-      res.status(200).json({
+      res.json({
         succees: true,
         message: "There is no product available",
       });
@@ -74,10 +74,10 @@ const deleteProduct = async (req, res) => {
   try {
     const { id } = req.params;
     const deletedProduct = await Product.findByIdAndDelete(id);
-    if (!deleteProduct) {
-      res.status(200).json({
-        succees: true,
-        message: "Product Not Found",
+
+    if (!deletedProduct) {
+      res.json({
+        message: "Product Not Found"
       });
     }
     res.status(200).json({
