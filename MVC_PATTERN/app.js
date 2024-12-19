@@ -9,7 +9,7 @@ dotenv.config();
 
 const port=process.env.PORT
 
-//body parser
+//body parser built-in middleware
 app.use(express.json());
 
 //connecting to Database
