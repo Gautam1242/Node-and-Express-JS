@@ -44,22 +44,22 @@ const addProducts = async (req, res) => {
 const updateProducts = async (req, res) => {
   try {
     console.log("Update request aayi");
-    const { id } = req.param;
+    const { id } = req.params;
+    console.log(id);
     const { name, price, description, category } = req.body;
-    const updatedProduct = Product.findByIdAndUpdate(
-      id,
+    const updatedProduct =await Product.findByIdAndUpdate(
+       id ,
       { name, price, description, category },
       { new: true }
     );
 
     if (!updatedProduct) {
       res.status(200).json({
-        succees: true,
-        message: "Product Not Found",
+        message: "Product Not Found"
       });
     }
     res.status(200).json({
-      succees: false,
+      succees: true,
       product: updatedProduct,
     });
   } catch (error) {
@@ -72,8 +72,8 @@ const updateProducts = async (req, res) => {
 
 const deleteProduct = async (req, res) => {
   try {
-    const { id } = req.param;
-    const deletedProduct = Product.findByIdAndDelete(id);
+    const { id } = req.params;
+    const deletedProduct = await Product.findByIdAndDelete(id);
     if (!deleteProduct) {
       res.status(200).json({
         succees: true,
@@ -87,7 +87,7 @@ const deleteProduct = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       succees: false,
-      message: "Internal Server Error",
+      message: "Internal Server Error"
     });
   }
 };
